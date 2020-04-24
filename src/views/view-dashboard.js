@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit-element';
-import { i18n, Theme } from '@furo/framework/src/furo.js';
-import { FBP } from '@furo/fbp';
+import {LitElement, html, css} from 'lit-element';
+import {i18n, Theme} from '@furo/framework/src/furo.js';
+import {FBP} from '@furo/fbp';
 
 import '@furo/layout/src/furo-vertical-flex.js';
 import '@furo/form';
@@ -9,6 +9,10 @@ import '@furo/app/src/furo-card.js';
 import '@furo/form/src/furo-form.js';
 import '@furo/input/src/furo-icon-button.js';
 import '@furo/notification/src/furo-snackbar.js';
+import '@ui5/webcomponents/dist/Timeline.js';
+import '@ui5/webcomponents/dist/Button.js';
+import '@ui5/webcomponents/dist/TimelineItem.js';
+import "@ui5/webcomponents-fiori/dist/ShellBar";
 
 /**
  * `view-dashboard`
@@ -29,7 +33,7 @@ class ViewDashboard extends FBP(LitElement) {
       /**
        * Description
        */
-      myBool: { type: Boolean },
+      myBool: {type: Boolean},
     };
   }
 
@@ -85,24 +89,31 @@ class ViewDashboard extends FBP(LitElement) {
     // language=HTML
     return html`
       <furo-vertical-flex>
-        <furo-app-bar-top drawer="main-drawer">
-          <div>Dashboard</div>
-          <furo-empty-spacer></furo-empty-spacer>
-          <furo-icon-button icon="search" @-click="--float"></furo-icon-button>
-          <furo-icon-button icon="settings" @-click="--op"></furo-icon-button>
-          <furo-snackbar
-            position-right
-            action-button-text="ignore"
-            timeout-in-ms="8000"
-            label-text="Settings page is not implemented yet. This message destroys itself in 8 seconds"
-            ƒ-show="--op"
-          ></furo-snackbar>
-        </furo-app-bar-top>
+        <ui5-shellbar
+          primary-title="Corporate Portal"
+          secondary-title="secondary title"
+          logo="../../../assets/images/sap-logo-svg.svg"
+          show-co-pilot
+          show-product-switch
+          show-notifications
+          notification-count="22"
+        >
+          <ui5-avatar slot="profile" image="../../../assets/images/avatars/woman_avatar_5.png"></ui5-avatar>
+        </ui5-shellbar>
         <div flex scroll class="content">
           <furo-card class="selected">
-            <img src="assets/images/hamburg.jpg" slot="media" alt="" />
-            <h1>${i18n.t('untranslated text')}</h1>
-            <p>${i18n.t('lorem')}</p>
+
+            <h1>Timeline</h1>
+
+            <ui5-timeline>
+                <ui5-timeline-item id="test-item" title-text="called" subtitle-text="20.02.2017 11:30" icon="" item-name="John Smith" item-name-clickable></ui5-timeline-item>
+                <ui5-timeline-item title-text="Weekly Sync - CP Design" subtitle-text="27.07.2017 (11:00 - 12:30)" icon="">
+                    <div>MR SOF02 2.43</div>
+                </ui5-timeline-item>
+                <ui5-timeline-item title-text="Video Converence Call - UI5" subtitle-text="31.01.2018 (12:00 - 13:00)" icon="calendar">
+                    <div>Online meeting</div>
+                </ui5-timeline-item>
+            </ui5-timeline>
           </furo-card>
 
           <furo-card disabled>
@@ -111,7 +122,7 @@ class ViewDashboard extends FBP(LitElement) {
             <p>Routing example with app-flow</p>
             <furo-app-flow event="form-requested" ƒ-trigger="--form"></furo-app-flow>
             <furo-horizontal-flex slot="action">
-              <furo-button primary ƒ-focus="--pageActivated" @-click="--form">register</furo-button>
+              <ui5-button design="Positive" ƒ-focus="--pageActivated" @-click="--form">register</ui5-button>
             </furo-horizontal-flex>
           </furo-card>
 
@@ -123,7 +134,7 @@ class ViewDashboard extends FBP(LitElement) {
               causses the router to navigate to the <strong>/auth</strong> page..
             </p>
             <furo-horizontal-flex slot="action">
-              <furo-button danger @-click="^^unauthorized">Unauth</furo-button>
+              <ui5-button design="Negative" @-click="^^unauthorized">Unauth</ui5-button>
             </furo-horizontal-flex>
           </furo-card>
         </div>
