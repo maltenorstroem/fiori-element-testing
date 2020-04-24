@@ -2,6 +2,8 @@ import { LitElement, html, css } from 'lit-element';
 import { Theme } from '@furo/framework/src/theme.js';
 import { FBP } from '@furo/fbp';
 
+import '@ui5/webcomponents/dist/Link.js';
+
 /**
  * `main-menu`
  * todo Describe your element
@@ -235,54 +237,54 @@ class MainMenu extends FBP(LitElement) {
 
       <ul>
         <li>
-          <a href="dashboard">
+          <ui5-link href="dashboard" design="Emphasized">
             <furo-icon icon="dashboard"></furo-icon>
-            dashboard</a
+            dashboard</ui5-link
           >
         </li>
         <li>
-          <a href="tree">
+          <ui5-link href="tree">
             <furo-icon icon="list"></furo-icon>
-            tree sample</a
+            tree sample</ui5-link
           >
         </li>
         <li>
-          <a href="tree-inline/xxx">
+          <ui5-link href="tree-inline/xxx">
             <furo-icon icon="list"></furo-icon>
-            tree inline</a
+            tree inline</ui5-link
           >
         </li>
       </ul>
       <div class="label">other stuff</div>
       <ul>
         <li>
-          <a href="form">
+          <ui5-link href="form">
             <furo-icon icon="receipt"></furo-icon>
-            form sample</a
+            form sample</ui5-link
           >
         </li>
         <li>
-          <a href="auth">
+          <ui5-link href="auth">
             <furo-icon icon="perm-identity"></furo-icon>
-            Auth</a
+            Auth</ui5-link
           >
         </li>
         <li>
-          <a href="unknown">
+          <ui5-link href="unknown">
             <furo-icon icon="extension"></furo-icon>
-            link to nowhere</a
+            link to nowhere</ui5-link
           >
         </li>
         <li>
-          <a href="somecontent">
+          <ui5-link href="somecontent">
             <furo-icon icon="warning"></furo-icon>
-            Blank page</a
+            Blank page</ui5-link
           >
         </li>
         <li>
-          <a href="examplelayout">
+          <ui5-link href="examplelayout">
             <furo-icon icon="view-day"></furo-icon>
-            layout example</a
+            layout example</ui5-link
           >
         </li>
       </ul>

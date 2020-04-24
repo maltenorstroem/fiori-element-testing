@@ -1,0 +1,12 @@
+#
+# Container Image
+#
+container:
+  image:
+    registry: "adcubum.adcr.io"
+  timezone: "Europe/Zurich"
+
+
+application:
+  # The proxy URL to the backend service.
+  backendService: ""

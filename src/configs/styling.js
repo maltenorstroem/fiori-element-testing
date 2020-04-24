@@ -27,7 +27,7 @@ export class Styling {
         --accent-dark: #bada18;
         --on-accent: #212121;
 
-        --background: #eeeeee;
+        --background: #f7f7f7;
         --on-background: #212121;
 
         --surface: #ffffff;

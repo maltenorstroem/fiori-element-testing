@@ -1,0 +1,68 @@
+worker_processes  1;
+error_log /var/log/nginx/error.log warn;
+events {
+    #worker_connections 1024;
+}
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    log_format access-log escape=json '{'
+            '"logger-name": "ACCESS",'
+            '"timestamp": "$time_iso8601",'
+            '"trace-id": "$http_x_b3_traceid",'
+            '"parent-id": "$http_x_b3_parentspanid",'
+            '"client-ip": "$remote_addr",'
+            '"request-verb": "$request_method",'
+            '"request-url": "$request_uri",'
+            '"request-length": "$request_length",'
+            '"response-code": "$status",'
+            '"bytes-sent": "$bytes_sent",'
+            '"body-bytes-sent": "$body_bytes_sent",'
+            '"referer": "$http_referer",'
+            '"user-agent": "$http_user_agent",'
+            '"upstream-addr": "$upstream_addr",'
+            '"upstream-status": "$upstream_status",'
+            '"request-time": "$request_time",'
+            '"upstream-response-time": "$upstream_response_time",'
+            '"upstream-connect-time": "$upstream_connect_time",'
+            '"upstream_header_time": "$upstream_header_time"'
+            '}';
+
+    access_log /var/log/nginx/access.log access-log;
+    sendfile on;
+    keepalive_timeout 65;
+    gzip on;
+    charset UTF-8;
+    index index.html index.htm;
+    server {
+        listen 8080;
+        server_name localhost;
+        root /usr/share/nginx/html;
+        location ~ ^(.*)\/@APPLICATION_ID@\/(?!api)(.*)$ {
+            rewrite ^(.*)\/@APPLICATION_ID@\/(?!api)(.*)$ /$2;
+            try_files /$2 /$2/ /index.html;
+            break;
+        }
+        location ~ ^(.*)\/@APPLICATION_ID@\/api(.*)$ {
+            proxy_cookie_path ~*^/.* /;
+            proxy_set_header api-base-url $1/@APPLICATION_ID@/api;
+            proxy_pass ${BACKEND_SERVICE}$2$is_args$args;
+            proxy_http_version 1.1;
+            break;
+        }
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+        location /api/ {
+            proxy_cookie_path ~*^/.* /;
+            proxy_set_header api-base-url /api;
+            proxy_pass ${BACKEND_SERVICE}/;
+            proxy_http_version 1.1;
+        }
+        location /health {
+            return 200 'alive';
+            add_header Content-Type text/plain;
+        }
+    }
+
+}

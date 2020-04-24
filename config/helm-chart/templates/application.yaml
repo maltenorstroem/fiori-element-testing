@@ -1,0 +1,26 @@
+apiVersion: core.platform.adcubum.com/v1alpha1
+kind: Application
+metadata:
+  name: %APPLICATION_ID%
+  labels:
+    app: %APPLICATION_ID%
+
+    app.kubernetes.io/name: %APPLICATION_ID%
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+    app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
+
+    helm.sh/chart-name: "{{ .Chart.Name }}"
+    helm.sh/chart-version: "{{ .Chart.Version }}"
+spec:
+  container:
+    image: '{{ required "a valid container.image.registry is required" .Values.container.image.registry }}/%APPLICATION_CONTAINER_IMAGE%:{{ .Chart.AppVersion }}'
+    ports:
+      - name: default
+        containerPort: 8080
+        protocol: http
+        ingress:
+          http:
+            enabled: true
+  configs:
+    - name: %APPLICATION_ID%

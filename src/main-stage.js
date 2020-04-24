@@ -109,8 +109,8 @@ class MainStage extends FBP(LitElement) {
         <main-menu
           slot="drawer"
           drawer="main-drawer"
-          header-text="Title"
-          secondary-text="Secondary text"
+          header-text="SAP Fiori"
+          secondary-text="Furo meets Fiori Look &amp; Feel"
         ></main-menu>
         <furo-pages
           ƒ-inject-location="--locationChanged"
