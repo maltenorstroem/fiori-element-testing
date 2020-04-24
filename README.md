@@ -1,5 +1,5 @@
 # Starter template example app
-Use this template to quickly get a running app. 
+to test the interoperability of Furo and SAP UI5
 
 ## Setup
 ### Step 1
