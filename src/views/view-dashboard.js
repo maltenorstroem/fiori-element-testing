@@ -12,7 +12,13 @@ import '@furo/notification/src/furo-snackbar.js';
 import '@ui5/webcomponents/dist/Timeline.js';
 import '@ui5/webcomponents/dist/Button.js';
 import '@ui5/webcomponents/dist/TimelineItem.js';
+import '@ui5/webcomponents/dist/Panel.js';
+import '@ui5/webcomponents/dist/Label.js';
 import "@ui5/webcomponents-fiori/dist/ShellBar";
+import "@ui5/webcomponents-icons/dist/icons/nav-back.js";
+import "@ui5/webcomponents-icons/dist/icons/phone.js";
+import "@ui5/webcomponents-icons/dist/icons/calendar.js";
+
 
 /**
  * `view-dashboard`
@@ -90,15 +96,13 @@ class ViewDashboard extends FBP(LitElement) {
     return html`
       <furo-vertical-flex>
         <ui5-shellbar
-          primary-title="Corporate Portal"
-          secondary-title="secondary title"
-          logo="../../../assets/images/sap-logo-svg.svg"
-          show-co-pilot
+          primary-title="Dashboard"
+          secondary-title="SAP Fiori Design Language"
           show-product-switch
           show-notifications
           notification-count="22"
         >
-          <ui5-avatar slot="profile" image="../../../assets/images/avatars/woman_avatar_5.png"></ui5-avatar>
+          <ui5-button icon="nav-back" slot="startButton"></ui5-button>
         </ui5-shellbar>
         <div flex scroll class="content">
           <furo-card class="selected">
@@ -106,8 +110,8 @@ class ViewDashboard extends FBP(LitElement) {
             <h1>Timeline</h1>
 
             <ui5-timeline>
-                <ui5-timeline-item id="test-item" title-text="called" subtitle-text="20.02.2017 11:30" icon="" item-name="John Smith" item-name-clickable></ui5-timeline-item>
-                <ui5-timeline-item title-text="Weekly Sync - CP Design" subtitle-text="27.07.2017 (11:00 - 12:30)" icon="">
+                <ui5-timeline-item id="test-item" icon="phone" title-text="called" subtitle-text="20.02.2017 11:30" icon="" item-name="John Smith" item-name-clickable></ui5-timeline-item>
+                <ui5-timeline-item title-text="Weekly Sync - CP Design" subtitle-text="27.07.2017 (11:00 - 12:30)" icon="calendar">
                     <div>MR SOF02 2.43</div>
                 </ui5-timeline-item>
                 <ui5-timeline-item title-text="Video Converence Call - UI5" subtitle-text="31.01.2018 (12:00 - 13:00)" icon="calendar">
@@ -136,6 +140,21 @@ class ViewDashboard extends FBP(LitElement) {
             <furo-horizontal-flex slot="action">
               <ui5-button design="Negative" @-click="^^unauthorized">Unauth</ui5-button>
             </furo-horizontal-flex>
+          </furo-card>
+
+          <furo-card>
+            <ui5-panel width="100%" collapsed="false" accessible-role="Complementary"
+                       header-text="Both expandable and expanded" class="full-width">
+              <h1 class="content-color">I am a native heading!</h1>
+              <ui5-label wrap>Short text.</ui5-label>
+              <br>
+              <ui5-label wrap>Another text.</ui5-label>
+              <p class="content-color">
+                Aute ullamco officia fugiat culpa do tempor tempor aute excepteur magna. Quis velit adipisicing
+                excepteur do eu duis elit. Sunt ea pariatur nulla est laborum proident sunt labore commodo Lorem laboris
+                nisi Lorem.
+              </p>
+            </ui5-panel>
           </furo-card>
         </div>
       </furo-vertical-flex>
