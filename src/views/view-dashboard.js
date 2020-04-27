@@ -12,6 +12,7 @@ import '@furo/notification/src/furo-snackbar.js';
 import '@ui5/webcomponents/dist/Timeline.js';
 import '@ui5/webcomponents/dist/Button.js';
 import '@ui5/webcomponents/dist/TimelineItem.js';
+import '@ui5/webcomponents/dist/Card.js';
 import '@ui5/webcomponents/dist/Panel.js';
 import '@ui5/webcomponents/dist/Label.js';
 import "@ui5/webcomponents-fiori/dist/ShellBar";
@@ -77,10 +78,37 @@ class ViewDashboard extends FBP(LitElement) {
           color: var(--on-surface);
         }
 
-        furo-card {
+        furo-card, ui5-card {
           margin: 0 var(--spacing) var(--spacing) 0;
           width: 280px;
           float: left;
+        }
+
+        .item {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .item-content-begin {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .item-content-begin-title {
+          padding-bottom: 0.25rem;
+        }
+
+        .status-error {
+          color: #b00;
+        }
+
+        .status-warning {
+          color: #e9730c;
+        }
+
+        .status-success {
+          color: #107e3e;
         }
       `
     );
@@ -104,58 +132,85 @@ class ViewDashboard extends FBP(LitElement) {
         >
           <ui5-button icon="nav-back" slot="startButton"></ui5-button>
         </ui5-shellbar>
+
         <div flex scroll class="content">
-          <furo-card class="selected">
-
-            <h1>Timeline</h1>
-
-            <ui5-timeline>
-                <ui5-timeline-item id="test-item" icon="phone" title-text="called" subtitle-text="20.02.2017 11:30" icon="" item-name="John Smith" item-name-clickable></ui5-timeline-item>
-                <ui5-timeline-item title-text="Weekly Sync - CP Design" subtitle-text="27.07.2017 (11:00 - 12:30)" icon="calendar">
-                    <div>MR SOF02 2.43</div>
+          <ui5-card heading="Activities" subheading="For today">
+            <div class="content content-padding">
+              <ui5-timeline>
+                <ui5-timeline-item id="test-item" icon="phone" title-text="called" subtitle-text="20.02.2017 11:30"
+                                   icon="" item-name="John Smith" item-name-clickable></ui5-timeline-item>
+                <ui5-timeline-item title-text="Weekly Sync - CP Design" subtitle-text="27.07.2017 (11:00 - 12:30)"
+                                   icon="calendar">
+                  <div>MR SOF02 2.43</div>
                 </ui5-timeline-item>
-                <ui5-timeline-item title-text="Video Converence Call - UI5" subtitle-text="31.01.2018 (12:00 - 13:00)" icon="calendar">
-                    <div>Online meeting</div>
+                <ui5-timeline-item title-text="Video Converence Call - UI5" subtitle-text="31.01.2018 (12:00 - 13:00)"
+                                   icon="calendar">
+                  <div>Online meeting</div>
                 </ui5-timeline-item>
-            </ui5-timeline>
-          </furo-card>
+              </ui5-timeline>
+            </div>
+          </ui5-card>
 
-          <furo-card disabled>
-            <img src="assets/images/hamburg.jpg" slot="media" alt="" />
-            <h1>App-flow...</h1>
-            <p>Routing example with app-flow</p>
+          <ui5-card disabled heading="App Flow" subheading="Routing example">
+            <img src="../../assets/images/hamburg.jpg" slot="avatar" alt=""/>
             <furo-app-flow event="form-requested" ƒ-trigger="--form"></furo-app-flow>
-            <furo-horizontal-flex slot="action">
-              <ui5-button design="Positive" ƒ-focus="--pageActivated" @-click="--form">register</ui5-button>
-            </furo-horizontal-flex>
-          </furo-card>
+            <div class="content content-padding">
+              <furo-horizontal-flex>
+                <ui5-button design="Positive" ƒ-focus="--pageActivated" @-click="--form">register</ui5-button>
+              </furo-horizontal-flex>
+            </div>
+          </ui5-card>
 
-          <furo-card>
-            <h1>Simulate unauthorized</h1>
-            <p>Click on the button to emmit a unauthorized event.</p>
-            <p>
-              The unathorized event is catched in the app-shell and triggers an app-flow event which
-              causses the router to navigate to the <strong>/auth</strong> page..
-            </p>
-            <furo-horizontal-flex slot="action">
+          <ui5-card heading="Dona Maria Moore" subheading="Senior Sales Executive" class="small">
+            <img src="../../assets/images/hamburg.jpg" slot="avatar"/>
+
+            <div class="content content-padding">
+              <ui5-title level="H5" style="padding-bottom: 1rem;">Contact details</ui5-title>
+
+              <div class="content-group">
+                <ui5-label>Company Name</ui5-label>
+                <ui5-title level="H6">Company A</ui5-title>
+              </div>
+              <div class="content-group">
+                <ui5-label>Address</ui5-label>
+                <ui5-title level="H6">481 West Street, Anytown 45066, USA</ui5-title>
+              </div>
+              <div class="content-group">
+                <ui5-label>Website</ui5-label>
+                <ui5-link target="_blank">www.company_a.example.com</ui5-link>
+              </div>
+            </div>
+          </ui5-card>
+
+          <ui5-card heading="Simulate unauthorized">
+            <div class="content content-padding">
+              <ui5-label>Click on the button to emmit a unauthorized event.</ui5-label>
+              <ui5-label>
+                The unathorized event is catched in the app-shell and triggers an app-flow event which
+                causses the router to navigate to the <strong>/auth</strong> page..
+              </ui5-label>
               <ui5-button design="Negative" @-click="^^unauthorized">Unauth</ui5-button>
-            </furo-horizontal-flex>
-          </furo-card>
 
-          <furo-card>
-            <ui5-panel width="100%" collapsed="false" accessible-role="Complementary"
-                       header-text="Both expandable and expanded" class="full-width">
-              <h1 class="content-color">I am a native heading!</h1>
-              <ui5-label wrap>Short text.</ui5-label>
-              <br>
-              <ui5-label wrap>Another text.</ui5-label>
-              <p class="content-color">
-                Aute ullamco officia fugiat culpa do tempor tempor aute excepteur magna. Quis velit adipisicing
-                excepteur do eu duis elit. Sunt ea pariatur nulla est laborum proident sunt labore commodo Lorem laboris
-                nisi Lorem.
-              </p>
-            </ui5-panel>
-          </furo-card>
+            </div>
+          </ui5-card>
+
+          <ui5-card heading="Both expandable and expanded">
+            <div class="content content-padding">
+              <ui5-panel width="100%" collapsed="false" accessible-role="Complementary"
+                         header-text="Content" class="full-width">
+                <ui5-title>I am a heading!</ui5-title>
+                <ui5-label wrap>Short text.</ui5-label>
+                <br>
+                <ui5-label wrap>Another text.</ui5-label>
+                <ui5-label class="content-color">
+                  Aute ullamco officia fugiat culpa do tempor tempor aute excepteur magna. Quis velit adipisicing
+                  excepteur do eu duis elit. Sunt ea pariatur nulla est laborum proident sunt labore commodo Lorem
+                  laboris
+                  nisi Lorem.
+                </ui5-label>
+              </ui5-panel>
+            </div>
+          </ui5-card>
         </div>
       </furo-vertical-flex>
     `;
