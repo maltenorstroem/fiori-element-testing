@@ -1,5 +1,5 @@
-# Starter template example app
-to test the interoperability of Furo and SAP UI5
+# SAP Fiori meets Furo
+Web app project to test the interoperability of Furo and SAP UI5
 
 ## Setup
 ### Step 1
