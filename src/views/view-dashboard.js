@@ -45,8 +45,12 @@ class ViewDashboard extends FBP(LitElement) {
   _FBPReady() {
     super._FBPReady();
     // this._FBPTraceWires()
-    this.shadowRoot.querySelector('ui5-shellbar').addEventListener("productSwitchClick", (event) => {
+    const SHELL_BAR = this.shadowRoot.querySelector('ui5-shellbar');
+    SHELL_BAR.addEventListener("productSwitchClick", (event) => {
       this._FBPTriggerWire('--prodSwitch', event.detail.targetRef);
+    });
+    SHELL_BAR.addEventListener("notificationsClick", (event) => {
+       this._FBPTriggerWire('--notificationClicked', event.detail.targetRef);
     });
   }
 
@@ -136,6 +140,13 @@ class ViewDashboard extends FBP(LitElement) {
             <ui5-product-switch-item heading="Document Cloud" subtitle="Manange"
                                      icon="add-document"></ui5-product-switch-item>
           </ui5-product-switch>
+        </ui5-popover>
+        <ui5-popover id="notification-popover" placement-type="Bottom" ƒ-open-by="--notificationClicked">
+          <ui5-tabcontainer class="full-width" collapsed fixed show-overflow>
+            <ui5-tab text="By date" selected></ui5-tab>
+            <ui5-tab text="By type"></ui5-tab>
+            <ui5-tab text="By priority"></ui5-tab>
+          </ui5-tabcontainer>
         </ui5-popover>
         <!-- Tab Container-->
         <ui5-tabcontainer class="full-width" collapsed fixed show-overflow>
