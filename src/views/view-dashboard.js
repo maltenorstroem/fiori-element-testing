@@ -15,6 +15,8 @@ import '@ui5/webcomponents/dist/TimelineItem.js';
 import '@ui5/webcomponents/dist/Card.js';
 import '@ui5/webcomponents/dist/Panel.js';
 import '@ui5/webcomponents/dist/Label.js';
+import '@ui5/webcomponents/dist/TabContainer.js';
+import '@ui5/webcomponents/dist/Tab.js';
 import "@ui5/webcomponents-fiori/dist/ShellBar";
 import "@ui5/webcomponents-icons/dist/icons/nav-back.js";
 import "@ui5/webcomponents-icons/dist/icons/phone.js";
@@ -132,7 +134,13 @@ class ViewDashboard extends FBP(LitElement) {
         >
           <ui5-button icon="nav-back" slot="startButton"></ui5-button>
         </ui5-shellbar>
+        <ui5-tabcontainer class="full-width" collapsed fixed show-overflow>
+          <ui5-tab text="Home" selected></ui5-tab>
+          <ui5-tab text="What's new"></ui5-tab>
+          <ui5-tab text="History"></ui5-tab>
+          <ui5-tab text="My Work Items" disabled></ui5-tab>
 
+        </ui5-tabcontainer>
         <div flex scroll class="content">
           <ui5-card heading="Activities" subheading="For today">
             <div class="content content-padding">
