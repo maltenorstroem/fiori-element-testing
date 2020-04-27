@@ -17,10 +17,15 @@ import '@ui5/webcomponents/dist/Panel.js';
 import '@ui5/webcomponents/dist/Label.js';
 import '@ui5/webcomponents/dist/TabContainer.js';
 import '@ui5/webcomponents/dist/Tab.js';
+import '@ui5/webcomponents/dist/Popover.js';
+import '@ui5/webcomponents-fiori/dist/ProductSwitch.js';
+import '@ui5/webcomponents-fiori/dist/ProductSwitchItem.js';
 import "@ui5/webcomponents-fiori/dist/ShellBar";
 import "@ui5/webcomponents-icons/dist/icons/nav-back.js";
 import "@ui5/webcomponents-icons/dist/icons/phone.js";
 import "@ui5/webcomponents-icons/dist/icons/calendar.js";
+import "@ui5/webcomponents-icons/dist/icons/add-document.js";
+import "@ui5/webcomponents-icons/dist/icons/add-activity.js";
 
 
 /**
@@ -33,18 +38,6 @@ import "@ui5/webcomponents-icons/dist/icons/calendar.js";
  * @appliesMixin FBP
  */
 class ViewDashboard extends FBP(LitElement) {
-  /**
-   * @private
-   * @return {Object}
-   */
-  static get properties() {
-    return {
-      /**
-       * Description
-       */
-      myBool: {type: Boolean},
-    };
-  }
 
   /**
    * flow is ready lifecycle method
@@ -52,6 +45,9 @@ class ViewDashboard extends FBP(LitElement) {
   _FBPReady() {
     super._FBPReady();
     // this._FBPTraceWires()
+    this.shadowRoot.querySelector('ui5-shellbar').addEventListener("productSwitchClick", (event) => {
+      this._FBPTriggerWire('--prodSwitch', event.detail.targetRef);
+    });
   }
 
   /**
@@ -130,17 +126,25 @@ class ViewDashboard extends FBP(LitElement) {
           secondary-title="SAP Fiori Design Language"
           show-product-switch
           show-notifications
-          notification-count="22"
-        >
+          notification-count="22">
           <ui5-button icon="nav-back" slot="startButton"></ui5-button>
         </ui5-shellbar>
+        <ui5-popover id="productswitch-popover" placement-type="Bottom" ƒ-open-by="--prodSwitch">
+          <ui5-product-switch>
+            <ui5-product-switch-item heading="Activities" subtitle="WorkItems"
+                                     icon="add-activity"></ui5-product-switch-item>
+            <ui5-product-switch-item heading="Document Cloud" subtitle="Manange"
+                                     icon="add-document"></ui5-product-switch-item>
+          </ui5-product-switch>
+        </ui5-popover>
+        <!-- Tab Container-->
         <ui5-tabcontainer class="full-width" collapsed fixed show-overflow>
           <ui5-tab text="Home" selected></ui5-tab>
           <ui5-tab text="What's new"></ui5-tab>
           <ui5-tab text="History"></ui5-tab>
           <ui5-tab text="My Work Items" disabled></ui5-tab>
-
         </ui5-tabcontainer>
+        <!-- Dashboard Grid-->
         <div flex scroll class="content">
           <ui5-card heading="Activities" subheading="For today">
             <div class="content content-padding">
