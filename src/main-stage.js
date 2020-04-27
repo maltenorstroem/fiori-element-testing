@@ -1,7 +1,7 @@
-import { LitElement, html, css } from 'lit-element';
-import { FBP } from '@furo/fbp';
-import { Theme } from '@furo/framework/src/theme.js';
-import { Styling } from './configs/styling.js';
+import {LitElement, html, css} from 'lit-element';
+import {FBP} from '@furo/fbp';
+import {Theme} from '@furo/framework/src/theme.js';
+import {Styling} from './configs/styling.js';
 
 import '@furo/input/src/furo-button.js';
 import '@furo/route/src/furo-location.js';
@@ -100,19 +100,7 @@ class MainStage extends FBP(LitElement) {
   render() {
     // language=HTML
     return html`
-      <furo-app-drawer
-        name="main-drawer"
-        ƒ-close="--locationChanged"
-        ƒ-open="--openNavClicked"
-        @-open-drawer-menu-clicked="--openNavClicked"
-      >
-        <main-menu
-          slot="drawer"
-          drawer="main-drawer"
-          header-text="SAP Fiori"
-          secondary-text="Furo meets Fiori Look &amp; Feel"
-        ></main-menu>
-        <furo-pages
+   <furo-pages
           ƒ-inject-location="--locationChanged"
           default="dashboard"
           @-response-error="--responseError"
@@ -127,7 +115,7 @@ class MainStage extends FBP(LitElement) {
           <view-generates-viewer name="generates"></view-generates-viewer>
           <view-404 name="404"></view-404>
         </furo-pages>
-      </furo-app-drawer>
+
 
       <furo-snackbar-display></furo-snackbar-display>
       <furo-location

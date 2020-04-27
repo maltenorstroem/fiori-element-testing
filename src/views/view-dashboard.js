@@ -14,7 +14,10 @@ import '@ui5/webcomponents/dist/Button.js';
 import '@ui5/webcomponents/dist/TimelineItem.js';
 import '@ui5/webcomponents/dist/Card.js';
 import '@ui5/webcomponents/dist/Panel.js';
+import '@ui5/webcomponents/dist/Title.js';
 import '@ui5/webcomponents/dist/Label.js';
+import '@ui5/webcomponents/dist/List.js';
+import '@ui5/webcomponents/dist/CustomListItem.js';
 import '@ui5/webcomponents/dist/TabContainer.js';
 import '@ui5/webcomponents/dist/Tab.js';
 import '@ui5/webcomponents/dist/Popover.js';
@@ -26,6 +29,7 @@ import "@ui5/webcomponents-icons/dist/icons/phone.js";
 import "@ui5/webcomponents-icons/dist/icons/calendar.js";
 import "@ui5/webcomponents-icons/dist/icons/add-document.js";
 import "@ui5/webcomponents-icons/dist/icons/add-activity.js";
+import "@ui5/webcomponents-icons/dist/icons/activities.js";
 
 
 /**
@@ -78,6 +82,7 @@ class ViewDashboard extends FBP(LitElement) {
           padding: var(--spacing-s);
           background-color: var(--background);
           color: var(--on-surface);
+
         }
 
         furo-card, ui5-card {
@@ -126,11 +131,12 @@ class ViewDashboard extends FBP(LitElement) {
     return html`
       <furo-vertical-flex>
         <ui5-shellbar
-          primary-title="Dashboard"
+          primary-title="Launchpad"
           secondary-title="SAP Fiori Design Language"
           show-product-switch
           show-notifications
-          notification-count="22">
+          notification-count="22"
+          logo="../../../assets/images/sap.png">
           <ui5-button icon="nav-back" slot="startButton"></ui5-button>
         </ui5-shellbar>
         <ui5-popover id="productswitch-popover" placement-type="Bottom" ƒ-open-by="--prodSwitch">
@@ -157,6 +163,40 @@ class ViewDashboard extends FBP(LitElement) {
         </ui5-tabcontainer>
         <!-- Dashboard Grid-->
         <div flex scroll class="content">
+          <ui5-card heading="Project Cloud Transformation" subheading="Revenue per Product | EUR" status="2 of 2"
+                    class="small">
+            <div class="content content-padding">
+            <ui5-list separators="None">
+              <ui5-li-custom>
+                <div class="item">
+                  <div class="item-content-begin">
+                    <ui5-title level="H5" class="item-content-begin-title">Avantel</ui5-title>
+                    <ui5-label>ID234522566-D44</ui5-label>
+                  </div>
+                  <div class="item-content-end">
+                    <span class="status-success">27.25K EUR</span>
+                  </div>
+                </div>
+              </ui5-li-custom>
+              <ui5-li-custom>
+                <div class="item">
+                  <div class="item-content-begin">
+                    <ui5-title level="H5" class="item-content-begin-title">Avantel</ui5-title>
+                    <ui5-label>ID234522566-D44</ui5-label>
+                  </div>
+                  <div class="item-content-end">
+                    <span class="status-success">27.25K EUR</span>
+                  </div>
+                </div>
+              </ui5-li-custom>
+            </ui5-list>
+            </div>
+          </ui5-card>
+          <ui5-card heading="My Tasks" subheading="All items" status="all open">
+            <div class="content content-padding">
+              <ui5-title level="H2">13</ui5-title>
+            </div>
+          </ui5-card>
           <ui5-card heading="Activities" subheading="For today">
             <div class="content content-padding">
               <ui5-timeline>
