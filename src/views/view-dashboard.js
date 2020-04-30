@@ -48,13 +48,13 @@ class ViewDashboard extends FBP(LitElement) {
    */
   _FBPReady() {
     super._FBPReady();
-    // this._FBPTraceWires()
+    this._FBPTraceWires()
     const SHELL_BAR = this.shadowRoot.querySelector('ui5-shellbar');
     SHELL_BAR.addEventListener("productSwitchClick", (event) => {
       this._FBPTriggerWire('--prodSwitch', event.detail.targetRef);
     });
     SHELL_BAR.addEventListener("notificationsClick", (event) => {
-       this._FBPTriggerWire('--notificationClicked', event.detail.targetRef);
+      this._FBPTriggerWire('--notificationClicked', event.detail.targetRef);
     });
   }
 
@@ -78,18 +78,32 @@ class ViewDashboard extends FBP(LitElement) {
           display: none;
         }
 
+        .grid {
+          display: grid;
+          grid-gap: 10px;
+          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          grid-auto-rows: 320px;
+        }
+
         .content {
           padding: var(--spacing-s);
-          background-color: var(--background);
           color: var(--on-surface);
+        }
 
+        .double-width {
+          grid-column-end: span 2;
+        }
+
+        .double-height {
+          grid-row-end: span 2;
         }
 
         furo-card, ui5-card {
           margin: 0 var(--spacing) var(--spacing) 0;
-          width: 280px;
-          float: left;
+          width: 100%;
+
         }
+
 
         .item {
           display: flex;
@@ -122,7 +136,6 @@ class ViewDashboard extends FBP(LitElement) {
   }
 
   /**
-   * @private
    * @returns {TemplateResult}
    * @private
    */
@@ -155,50 +168,50 @@ class ViewDashboard extends FBP(LitElement) {
           </ui5-tabcontainer>
         </ui5-popover>
         <!-- Tab Container-->
-        <ui5-tabcontainer class="full-width" collapsed fixed show-overflow>
+        <ui5-tabcontainer class="full-width" collapsed fixed show-overflow @-tabselect="--tabSelect">
           <ui5-tab text="Home" selected></ui5-tab>
           <ui5-tab text="What's new"></ui5-tab>
           <ui5-tab text="History"></ui5-tab>
           <ui5-tab text="My Work Items" disabled></ui5-tab>
         </ui5-tabcontainer>
         <!-- Dashboard Grid-->
-        <div flex scroll class="content">
+        <div flex scroll class="content grid">
           <ui5-card heading="Project Cloud Transformation" subheading="Revenue per Product | EUR" status="2 of 2"
-                    class="small">
-            <div class="content content-padding">
-            <ui5-list separators="None">
-              <ui5-li-custom>
-                <div class="item">
-                  <div class="item-content-begin">
-                    <ui5-title level="H5" class="item-content-begin-title">Avantel</ui5-title>
-                    <ui5-label>ID234522566-D44</ui5-label>
+                    class="small double">
+            <div class="content ">
+              <ui5-list separators="None">
+                <ui5-li-custom>
+                  <div class="item">
+                    <div class="item-content-begin">
+                      <ui5-title level="H5" class="item-content-begin-title">Avantel</ui5-title>
+                      <ui5-label>ID234522566-D44</ui5-label>
+                    </div>
+                    <div class="item-content-end">
+                      <span class="status-success">27.25K EUR</span>
+                    </div>
                   </div>
-                  <div class="item-content-end">
-                    <span class="status-success">27.25K EUR</span>
+                </ui5-li-custom>
+                <ui5-li-custom>
+                  <div class="item">
+                    <div class="item-content-begin">
+                      <ui5-title level="H5" class="item-content-begin-title">Avantel</ui5-title>
+                      <ui5-label>ID234522566-D44</ui5-label>
+                    </div>
+                    <div class="item-content-end">
+                      <span class="status-success">27.25K EUR</span>
+                    </div>
                   </div>
-                </div>
-              </ui5-li-custom>
-              <ui5-li-custom>
-                <div class="item">
-                  <div class="item-content-begin">
-                    <ui5-title level="H5" class="item-content-begin-title">Avantel</ui5-title>
-                    <ui5-label>ID234522566-D44</ui5-label>
-                  </div>
-                  <div class="item-content-end">
-                    <span class="status-success">27.25K EUR</span>
-                  </div>
-                </div>
-              </ui5-li-custom>
-            </ui5-list>
+                </ui5-li-custom>
+              </ui5-list>
             </div>
           </ui5-card>
           <ui5-card heading="My Tasks" subheading="All items" status="all open">
-            <div class="content content-padding">
+            <div class="content ">
               <ui5-title level="H2">13</ui5-title>
             </div>
           </ui5-card>
-          <ui5-card heading="Activities" subheading="For today">
-            <div class="content content-padding">
+          <ui5-card heading="Activities" subheading="For today" class="double-height">
+            <div class="content ">
               <ui5-timeline>
                 <ui5-timeline-item id="test-item" icon="phone" title-text="called" subtitle-text="20.02.2017 11:30"
                                    icon="" item-name="John Smith" item-name-clickable></ui5-timeline-item>
@@ -213,21 +226,19 @@ class ViewDashboard extends FBP(LitElement) {
               </ui5-timeline>
             </div>
           </ui5-card>
-
           <ui5-card disabled heading="App Flow" subheading="Routing example">
             <img src="../../assets/images/hamburg.jpg" slot="avatar" alt=""/>
             <furo-app-flow event="form-requested" ƒ-trigger="--form"></furo-app-flow>
-            <div class="content content-padding">
+            <div class="content ">
               <furo-horizontal-flex>
                 <ui5-button design="Positive" ƒ-focus="--pageActivated" @-click="--form">register</ui5-button>
               </furo-horizontal-flex>
             </div>
           </ui5-card>
-
           <ui5-card heading="Dona Maria Moore" subheading="Senior Sales Executive" class="small">
             <img src="../../assets/images/hamburg.jpg" slot="avatar"/>
 
-            <div class="content content-padding">
+            <div class="content ">
               <ui5-title level="H5" style="padding-bottom: 1rem;">Contact details</ui5-title>
 
               <div class="content-group">
@@ -244,9 +255,8 @@ class ViewDashboard extends FBP(LitElement) {
               </div>
             </div>
           </ui5-card>
-
           <ui5-card heading="Simulate unauthorized">
-            <div class="content content-padding">
+            <div class="content ">
               <ui5-label>Click on the button to emmit a unauthorized event.</ui5-label>
               <ui5-label>
                 The unathorized event is catched in the app-shell and triggers an app-flow event which
@@ -256,9 +266,8 @@ class ViewDashboard extends FBP(LitElement) {
 
             </div>
           </ui5-card>
-
           <ui5-card heading="Both expandable and expanded">
-            <div class="content content-padding">
+            <div class="content ">
               <ui5-panel width="100%" collapsed="false" accessible-role="Complementary"
                          header-text="Content" class="full-width">
                 <ui5-title>I am a heading!</ui5-title>
@@ -275,7 +284,7 @@ class ViewDashboard extends FBP(LitElement) {
             </div>
           </ui5-card>
         </div>
-      </furo-vertical-flex>
+        </div>
     `;
   }
 }

@@ -6,8 +6,10 @@ import '@furo/input/src/furo-icon-button.js';
 import '@furo/notification/src/furo-banner-display.js';
 import '@furo/notification/src/furo-banner.js';
 import '@furo/util/src/furo-keydown.js';
-
 import '@furo/app/src/furo-tooltip.js';
+
+import "@ui5/webcomponents-fiori/dist/ShellBar";
+
 import '../formsample/sample-form.js';
 
 /**
@@ -85,23 +87,15 @@ class ViewFormsample extends FBP(LitElement) {
     // language=HTML
     return html`
       <furo-vertical-flex>
-        <furo-app-bar-top
-          drawer="main-drawer"
-          extended
-          ƒ-start-activity="--start"
-          ƒ-stop-activity="--stop"
-          navigation-icon="arrow-back"
-          @-navigation-clicked="^^navigate-back-clicked"
-        >
-          <div>Sample Form</div>
-          <furo-empty-spacer></furo-empty-spacer>
-          <furo-icon-button icon="check" @-click="--pin"
-            ><furo-tooltip label="no way"></furo-tooltip
-          ></furo-icon-button>
-          <div slot="extended">
-            Sample Form: Juheee , this is a lot of text and should break to a second line
-          </div>
-        </furo-app-bar-top>
+        <ui5-shellbar
+          primary-title="Launchpad"
+          secondary-title="SAP Fiori Design Language"
+          show-product-switch
+          show-notifications
+          notification-count="22"
+          logo="../../../assets/images/sap.png">
+          <ui5-button icon="nav-back" slot="startButton"></ui5-button>
+        </ui5-shellbar>
         <furo-banner-display></furo-banner-display>
         <furo-vertical-flex flex class="content">
           <sample-form flex scroll></sample-form>
@@ -128,7 +122,7 @@ class ViewFormsample extends FBP(LitElement) {
 ## This is a h2
 ### This is a h3
 You can place markdown content here
- - insert the username 
+ - insert the username
  - set a **valid** date
 
 Thank you."
